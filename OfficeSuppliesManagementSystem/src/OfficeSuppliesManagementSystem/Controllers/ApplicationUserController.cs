@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,6 +13,7 @@ using OfficeSuppliesManagementSystem.ViewModels.ApplicationUser;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
+    [Authorize]
     public class ApplicationUserController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,7 +33,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         }
 
         // GET: ApplicationUser/Details/5
-        [Authorize(Roles = "π‹¿Ì‘±")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Details(int? id)
         {
             if (id == null)

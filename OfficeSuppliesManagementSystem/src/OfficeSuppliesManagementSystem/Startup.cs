@@ -121,7 +121,7 @@ namespace OfficeSuppliesManagementSystem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Account}/{action=Login}/{id?}");
+                    template: "{controller=Supply}/{action=Index}/{id?}");
             });
 
             Mapper.Initialize(cfg =>

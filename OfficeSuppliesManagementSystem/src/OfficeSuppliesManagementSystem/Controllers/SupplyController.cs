@@ -1,10 +1,12 @@
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using OfficeSuppliesManagementSystem.Models;
 using OfficeSuppliesManagementSystem.Utilities;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
+    [Authorize]
     public class SupplyController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -38,6 +40,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         }
 
         // GET: Supply/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewBag.ProvinceSelectItems = typeof (Supply.EProvince).GenerateSelectItems();
@@ -48,15 +51,16 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: Supply/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create(Supply supply)
         {
             if (ModelState.IsValid)
             {
+                _context.Supply.Add(supply);
                 _context.Inventory.Add(new Inventory
                 {
                     Supply = supply
                 });
-                _context.Supply.Add(supply);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,6 +70,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         }
 
         // GET: Supply/Edit/5
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: Supply/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(Supply supply)
         {
             if (ModelState.IsValid)
@@ -101,6 +107,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
 
         // GET: Supply/Delete/5
         [ActionName("Delete")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,6 +127,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: Supply/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteConfirmed(int id)
         {
             var supply = _context.Supply.Single(m => m.Id == id);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +11,11 @@ namespace OfficeSuppliesManagementSystem.Models
     {
         public enum EApplyStatus
         {
+            [Display(Name = "待处理")]
             Pending = 0x0,
+            [Display(Name = "已批准")]
             Accepted = 0x1,
+            [Display(Name = "已拒绝")]
             Rejected = 0x2
         }
         public int Id { get; set; }

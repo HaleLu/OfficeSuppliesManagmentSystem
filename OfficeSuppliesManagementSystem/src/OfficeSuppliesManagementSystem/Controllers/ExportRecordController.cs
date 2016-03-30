@@ -1,4 +1,5 @@
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
@@ -6,9 +7,10 @@ using OfficeSuppliesManagementSystem.Models;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
+    [Authorize]
     public class ExportRecordController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public ExportRecordController(ApplicationDbContext context)
         {

@@ -1,6 +1,7 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
@@ -9,6 +10,7 @@ using OfficeSuppliesManagementSystem.ViewModels.ImportRecord;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
+    [Authorize]
     public class ImportRecordController : Controller
     {
         private readonly ApplicationDbContext _context;

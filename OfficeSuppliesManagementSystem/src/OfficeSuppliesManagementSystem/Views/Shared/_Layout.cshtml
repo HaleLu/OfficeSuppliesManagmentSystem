@@ -31,14 +31,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @if (User.IsInRole("管理员"))
+                        @if (User.IsInRole("Administrator"))
                         {
                             <li><a asp-controller="ApplicationUser" asp-action="Index">用户维护</a></li>
                         }
                         <li><a asp-controller="Supply" asp-action="Index">物品信息</a></li>
                         <li><a asp-controller="Inventory" asp-action="Index">库存查询</a></li>
                         
-                        @if (User.IsInRole("管理员"))
+                        @if (User.IsInRole("Administrator"))
                         {
                             
                             <li><a asp-controller="ImportRecord" asp-action="Index">物品入库</a></li>
