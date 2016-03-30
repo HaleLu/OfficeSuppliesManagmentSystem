@@ -1,0 +1,76 @@
+@model OfficeSuppliesManagementSystem.Models.Supply
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Supply</h4>
+        <hr/>
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id"/>
+        <div class="form-group">
+            <label asp-for="Model" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Model" class="form-control"/>
+                <span asp-validation-for="Model" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Province" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Province" asp-items="ViewBag.ProvinceSelectItems" class="form-control"></select>
+                <span asp-validation-for="Province" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Specification" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Specification" class="form-control"/>
+                <span asp-validation-for="Specification" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Type" asp-items="ViewBag.TypeSelectItems" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form id="photo" name="photo" class="col-sm-4 col-md-2 hidden-xs">
+    <img src="~/images/nohead.jpg" width="150" height="210" alt="" />
+    <i type="button" id="photo-upload"></i>
+    <input id="image-file" type="file" accept="image/jpeg,image/png,image/gif">
+    <br />
+    <span>推荐尺寸150x210像素</span>
+    <br />
+    <span>支持格式: jpg, png, gif</span>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
