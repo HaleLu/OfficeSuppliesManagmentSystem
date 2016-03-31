@@ -18,8 +18,8 @@ namespace OfficeSuppliesManagementSystem.Models
         [ForeignKey("SupplyId")]
         public Supply Supply { get; set; }
         
-        public IEnumerable<ImportRecord> ImportRecords { get; set; }
+        public ICollection<ImportRecord> ImportRecords { get; set; }
         
-        public IEnumerable<ExportRecord> ExportRecords { get; set; }
+        public ICollection<ExportRecord> ExportRecords { get; set; }
     }
 }

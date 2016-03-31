@@ -9,7 +9,7 @@ namespace OfficeSuppliesManagementSystem.ViewModels.ImportRecord
     public class CreateViewModel
     {
         [Display(Name = "物品编码")]
-        public int SupplyId { get; set; }
+        public int InventoryId { get; set; }
 
         [Display(Name = "购买日期")]
         public DateTime PurchaseDate { get; set; }

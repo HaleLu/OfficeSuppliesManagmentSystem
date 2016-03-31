@@ -1,18 +1,21 @@
 ﻿@model IEnumerable<OfficeSuppliesManagementSystem.Models.ImportRecord>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "入库记录";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新的入库记录</a>
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PurchaseDate)
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inventory.Supply.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -23,14 +26,20 @@
         <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </th>
         <th></th>
     </tr>
     
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PurchaseDate)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.Inventory.Supply.Name)
+        </th>
         <td>
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
@@ -41,9 +50,11 @@
             @Html.DisplayFor(modelItem => item.UnitPrice)
         </td>
         <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            @Html.DisplayFor(modelItem => item.PurchaseDate)
+        </td>
+        <td>
+            <a asp-action="Delete" asp-route-id="@item.Id">删除</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">详细信息</a>
         </td>
     </tr>
 }

@@ -1,20 +1,32 @@
 ﻿@model OfficeSuppliesManagementSystem.Models.ImportRecord
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "入库详细";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
-    <h4>ImportRecord</h4>
+    <h4>入库记录</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PurchaseDate)
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PurchaseDate)
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.Supply.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.Supply.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.Supply.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.Supply.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -34,9 +46,14 @@
         <dd>
             @Html.DisplayFor(model => model.UnitPrice)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
     </dl>
 </div>
 <p>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回列表</a>
 </p>
