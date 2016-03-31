@@ -9,7 +9,7 @@ namespace OfficeSuppliesManagementSystem.Models
 {
     public class ImportRecord
     {
-        [Display(Name = "入库流水号")]
+        [Display(Name = "流水号")]
         public int Id { get; set; }
 
         [Required]
@@ -23,7 +23,7 @@ namespace OfficeSuppliesManagementSystem.Models
         [Display(Name = "单价")]
         public double UnitPrice { get; set; }
 
-        [Display(Name = "总价 ")]
+        [Display(Name = "总价")]
         public double TotalPrice { get; set; }
 
         [Required]

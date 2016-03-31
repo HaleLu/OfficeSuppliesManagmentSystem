@@ -71,6 +71,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
                 importRecord.Inventory = await _context.Inventory.FirstOrDefaultAsync(m => m.Id == model.InventoryId);
                 importRecord.UnitPrice = model.TotalPrice/model.Quantity;
                 importRecord.Inventory.Quantity += importRecord.Quantity;
+                _context.Inventory.Update(importRecord.Inventory);
                 _context.ImportRecord.Add(importRecord);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

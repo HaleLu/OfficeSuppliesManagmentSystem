@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Supply>
+﻿@using OfficeSuppliesManagementSystem.Utilities
+@model IEnumerable<Supply>
 
 @{
     ViewData["Title"] = "物品信息";
@@ -47,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @item.Type.GetDisplayName()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Model)
@@ -56,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Specification)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Province)
+                @item.Province.GetDisplayName()
             </td>
             <td>
                 @if (User.IsInRole("Administrator"))

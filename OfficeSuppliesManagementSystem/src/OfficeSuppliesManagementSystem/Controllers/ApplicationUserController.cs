@@ -13,7 +13,7 @@ using OfficeSuppliesManagementSystem.ViewModels.ApplicationUser;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class ApplicationUserController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -27,6 +27,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
 
 
         // GET: ApplicationUser
+        [Authorize(Roles = "Administrator")]
         public IActionResult Index()
         {
             return View(_context.ApplicationUser.ToList());
@@ -42,15 +43,13 @@ namespace OfficeSuppliesManagementSystem.Controllers
             }
 
             ApplicationUser applicationUser = _context.ApplicationUser.Single(m => m.Id == id);
-            if (applicationUser == null)
-            {
-                return HttpNotFound();
-            }
+            applicationUser.Gender.GetDisplayName();
 
             return View(applicationUser);
         }
 
         // GET: ApplicationUser/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -71,6 +70,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: ApplicationUser/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
             if (ModelState.IsValid)
@@ -86,6 +86,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
 
         // GET: ApplicationUser/Delete/5
         [ActionName("Delete")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +106,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: ApplicationUser/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteConfirmed(int id)
         {
             ApplicationUser applicationUser = _context.ApplicationUser.Single(m => m.Id == id);

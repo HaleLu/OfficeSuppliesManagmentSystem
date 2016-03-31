@@ -9,13 +9,15 @@ namespace OfficeSuppliesManagementSystem.ViewModels.Account
     public class LoginViewModel
     {
         [Required]
+        [Display(Name = "ID")]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "密码")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "记住密码")]
         public bool RememberMe { get; set; }
     }
 }

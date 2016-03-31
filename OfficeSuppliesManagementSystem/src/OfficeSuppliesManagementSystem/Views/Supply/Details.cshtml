@@ -1,4 +1,5 @@
-﻿@model OfficeSuppliesManagementSystem.Models.Supply
+﻿@using OfficeSuppliesManagementSystem.Utilities
+@model OfficeSuppliesManagementSystem.Models.Supply
 
 @{
     ViewData["Title"] = "详细信息";
@@ -26,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Type)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Model.Type.GetDisplayName()
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Model)
@@ -44,7 +45,7 @@
             @Html.DisplayNameFor(model => model.Province)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Province)
+            @Model.Province.GetDisplayName()
         </dd>
     </dl>
 </div>
