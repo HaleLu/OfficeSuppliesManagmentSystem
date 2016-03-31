@@ -20,7 +20,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // GET: Inventory
         public IActionResult Index()
         {
-            return View(_context.Inventory.ToList());
+            return View(_context.Inventory.Include(m => m.Supply).ToList());
         }
 
         // GET: Inventory/Details/5
@@ -31,7 +31,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
                 return HttpNotFound();
             }
 
-            Inventory inventory = _context.Inventory.Single(m => m.Id == id);
+            var inventory = _context.Inventory.Include(m => m.Supply).Single(m => m.Id == id);
             if (inventory == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,9 @@ namespace OfficeSuppliesManagementSystem.Controllers
 
             return View(inventory);
         }
-        
+
         // GET: Inventory/Edit/5
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -48,7 +49,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
                 return HttpNotFound();
             }
 
-            Inventory inventory = _context.Inventory.Single(m => m.Id == id);
+            var inventory = _context.Inventory.Include(m => m.Supply).Single(m => m.Id == id);
             if (inventory == null)
             {
                 return HttpNotFound();
@@ -59,6 +60,7 @@ namespace OfficeSuppliesManagementSystem.Controllers
         // POST: Inventory/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(Inventory inventory)
         {
             if (ModelState.IsValid)

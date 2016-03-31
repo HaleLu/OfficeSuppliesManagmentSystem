@@ -11,6 +11,7 @@ namespace OfficeSuppliesManagementSystem.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "库存数量")]
         public int Quantity { get; set; }
 
         [Required]

@@ -1,16 +1,25 @@
 ﻿@model IEnumerable<OfficeSuppliesManagementSystem.Models.Inventory>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "库存查询";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-controller="Supply" asp-action="Create">创建新的物品</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Supply.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supply.Name)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
@@ -20,12 +29,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Supply.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supply.Name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
         <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            @if (User.IsInRole("Administrator"))
+            {
+                <a asp-action="Edit" asp-route-id="@item.Id">修改</a>
+                <label>|</label>
+            }
+            
+            <a asp-action="Details" asp-route-id="@item.Id">详细信息</a>
         </td>
     </tr>
 }
