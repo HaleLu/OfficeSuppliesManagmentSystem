@@ -132,6 +132,8 @@ namespace OfficeSuppliesManagementSystem
                 cfg.CreateMap<ImportRecord, ViewModels.ImportRecord.CreateViewModel>();
                 cfg.CreateMap<ViewModels.ExportRecord.CreateViewModel, ExportRecord>();
                 cfg.CreateMap<ExportRecord, ViewModels.ExportRecord.CreateViewModel>();
+                cfg.CreateMap<ViewModels.Supply.EditViewModel, Supply>();
+                cfg.CreateMap<Supply, ViewModels.Supply.EditViewModel>();
             });
         }
 

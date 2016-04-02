@@ -30,10 +30,10 @@
             @Model.Type.GetDisplayName()
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.Serial)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Model)
+            @Html.DisplayFor(model => model.Serial)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Specification)
@@ -46,6 +46,12 @@
         </dt>
         <dd>
             @Model.Province.GetDisplayName()
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </dt>
+        <dd>
+            <img src="~/@Model.PhotoUrl" alt=""/>
         </dd>
     </dl>
 </div>

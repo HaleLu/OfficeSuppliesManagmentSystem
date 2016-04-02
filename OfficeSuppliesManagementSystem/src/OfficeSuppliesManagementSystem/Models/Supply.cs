@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Http;
 
 namespace OfficeSuppliesManagementSystem.Models
 {
@@ -123,7 +125,10 @@ namespace OfficeSuppliesManagementSystem.Models
         public string Specification { set; get; }
 
         [Display(Name = "型号")]
-        public string Model { set; get; }
+        public string Serial { set; get; }
+        
+        [Display(Name = "照片")]
+        public string PhotoUrl { get; set; } = "\\wwwroot\\images\\Supply\\default.jpg";
 
         #endregion 字段
     }

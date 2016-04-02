@@ -1,8 +1,13 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using AutoMapper;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.PlatformAbstractions;
 using OfficeSuppliesManagementSystem.Models;
 using OfficeSuppliesManagementSystem.Utilities;
+using OfficeSuppliesManagementSystem.ViewModels.Supply;
+using Microsoft.AspNet.Http;
 
 namespace OfficeSuppliesManagementSystem.Controllers
 {
@@ -10,10 +15,11 @@ namespace OfficeSuppliesManagementSystem.Controllers
     public class SupplyController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public SupplyController(ApplicationDbContext context)
+        private readonly IApplicationEnvironment _appEnv;
+        public SupplyController(ApplicationDbContext context, IApplicationEnvironment appEnv)
         {
             _context = context;
+            _appEnv = appEnv;
         }
 
         // GET: Supply
@@ -85,24 +91,31 @@ namespace OfficeSuppliesManagementSystem.Controllers
             }
             ViewBag.ProvinceSelectItems = typeof (Supply.EProvince).GenerateSelectItems(supply.Province);
             ViewBag.TypeSelectItems = typeof (Supply.ESupplyType).GenerateSelectItems(supply.Type);
-            return View(supply);
+            return View(Mapper.Map<EditViewModel>(supply));
         }
 
         // POST: Supply/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(Supply supply)
+        public IActionResult Edit(EditViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Update(supply);
+                var supply = Mapper.Map<Supply>(model);
+                var file = Request.Form.Files.GetFile("Photo");
+                if (file != null)
+                {
+                    supply.PhotoUrl = "images\\Supply\\" + model.Id + "." + file.ContentType.Split('/')[1];
+                    file.SaveAs(supply.PhotoUrl);
+                }
+                if (supply != null) _context.Update(supply);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProvinceSelectItems = typeof (Supply.EProvince).GenerateSelectItems(supply.Province);
-            ViewBag.TypeSelectItems = typeof (Supply.ESupplyType).GenerateSelectItems(supply.Type);
-            return View(supply);
+            ViewBag.ProvinceSelectItems = typeof (Supply.EProvince).GenerateSelectItems(model.Province);
+            ViewBag.TypeSelectItems = typeof (Supply.ESupplyType).GenerateSelectItems(model.Type);
+            return View(model);
         }
 
         // GET: Supply/Delete/5
